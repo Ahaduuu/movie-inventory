@@ -1,39 +1,29 @@
 
 :root {
-
-    --primary-color: #e50914;    
-    --bg-body: #141414;            
-    --bg-panel: #1f1f1f;           
-    --bg-card: #2f2f2f;
+    --primary-color: #e50914;
     --text-main: #ffffff;
     --text-muted: #b3b3b3;
-    --border-color: #404040;
-    --shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-
-body.light-mode {
-    --primary-color: #3498db;     
-    --bg-body: #f4f4f9;            
-    --bg-panel: #ffffff;           
-    --bg-card: #ffffff;
-    --text-main: #333333;
-    --text-muted: #666666;
-    --border-color: #ddd;
-    --shadow: 0 4px 15px rgba(0,0,0,0.1);
+    --border-color: rgba(255, 255, 255, 0.1); 
+    
+    --glass-heavy: rgba(20, 20, 20, 0.95);
+    --glass-medium: rgba(31, 31, 31, 0.75); 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
-    background-color: var(--bg-body);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9)), 
+                url('https://wallpaperaccess.com/full/329583.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    
     color: var(--text-main);
     font-family: 'Segoe UI', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
 
     display: grid;
     min-height: 100vh;
-    grid-template-columns: 260px 1fr;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 260px 1fr; 
+    grid-template-rows: auto 300px 1fr auto; 
     grid-template-areas: 
         "header header"
         "hero hero"
@@ -45,83 +35,94 @@ body {
     grid-area: header;
     position: sticky;
     top: 0;
-    z-index: 100;
-}
-.home-header {
-    background-color: var(--bg-panel); 
-    padding: 15px 0;
+    z-index: 1000;
+    background-color: var(--glass-heavy); 
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
+    width: 100%;
 }
+
 .header-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 15px 30px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.brand-logo h1 { color: var(--primary-color); text-transform: uppercase; letter-spacing: 2px; }
-.nav-items { display: flex; gap: 20px; list-style: none; align-items: center; }
-.nav-item a { color: var(--text-main); text-decoration: none; font-weight: bold; }
-.nav-item a:hover { color: var(--text-muted); }
-
-#theme-toggle {
-    background: transparent;
-    border: 1px solid var(--text-main);
-    color: var(--text-main);
-    padding: 5px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-#theme-toggle:hover {
-    background: var(--text-main);
-    color: var(--bg-body);
-}
+.brand-logo h1 { color: var(--primary-color); text-transform: uppercase; margin: 0; }
+.nav-items { display: flex; gap: 30px; list-style: none; }
+.nav-item a { color: var(--text-main); text-decoration: none; font-weight: 500; }
 
 .hero-section {
     grid-area: hero;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), var(--bg-body)), url('https://wallpaperaccess.com/full/329583.jpg'); /* Cinematic overlay */
-    background-size: cover;
-    background-position: center;
-    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    border-bottom: 1px solid var(--border-color);
+    
+    background: transparent; 
+    padding: 20px;
 }
-.hero-text h2 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 4px black; }
+.hero-text h2 { 
+    font-size: 3.5rem; 
+    text-shadow: 0 5px 15px rgba(0,0,0,1);
+    margin-bottom: 15px;
+}
+.hero-text p {
+    font-size: 1.2rem;
+    color: #ddd;
+    text-shadow: 0 2px 5px rgba(0,0,0,1);
+}
 
 .search-and-filter {
     grid-area: sidebar;
-    background-color: var(--bg-panel);
-    padding: 2rem;
+    background-color: var(--glass-medium);
+    backdrop-filter: blur(5px);
     border-right: 1px solid var(--border-color);
+    padding: 30px 20px;
+    
+    height: 100%; 
 }
-.search-and-filter label { display: block; margin-bottom: 10px; color: var(--text-muted); }
+
 .search-and-filter input, .search-and-filter select {
     width: 100%;
-    padding: 10px;
-    background: var(--bg-body);
+    padding: 12px;
+    background: rgba(0,0,0,0.6);
     border: 1px solid var(--border-color);
-    color: var(--text-main);
-    border-radius: 4px;
-    margin-bottom: 20px;
+    color: #fff;
+    border-radius: 6px;
+    margin-bottom: 25px;
 }
-#footer { grid-area: footer; }
-.footer {
-    background-color: var(--bg-panel);
+
+#main-content, .movie-grid { 
+    grid-area: main;
+    padding: 30px;
+    background: rgba(0,0,0,0.4); 
+}
+
+
+#footer {
+    grid-area: footer;
+    background-color: var(--glass-heavy);
     border-top: 1px solid var(--border-color);
     padding: 40px;
+    text-align: center;
     color: var(--text-muted);
 }
-.footer-container { display: flex; justify-content: space-between; max-width: 1000px; margin: 0 auto; }
 
 @media (max-width: 768px) {
     body {
         grid-template-columns: 1fr;
-        grid-template-areas: "header" "hero" "sidebar" "main" "footer";
+        grid-template-rows: auto auto auto 1fr auto;
+        grid-template-areas: 
+            "header"
+            "hero" 
+            "sidebar" 
+            "main" 
+            "footer";
     }
-    .header-container { flex-direction: column; gap: 15px; }
-    .search-and-filter { border-right: none; border-bottom: 1px solid var(--border-color); }
+    .hero-text h2 { font-size: 2rem; }
+    .nav-items { gap: 15px; font-size: 0.9rem; }
 }
-.hidden { display: none; }
